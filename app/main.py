@@ -1,86 +1,68 @@
 import streamlit as st
-import random
-import pandas as pd
+import logging
+from config import DIFFICULTY_LEVELS
+from data_loader import load_sentences
+from session_utils import init_session_state
+from app_ui import game_setup_screen, game_loop
 
-# Load sentence data
-@st.cache_data
-def load_sentences():
-    df = pd.read_csv("data/audio/sentences.csv")
-    return df
+# --- Logging setup ---
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    datefmt="%H:%M:%S"
+)
 
-# Pick one random question
-def get_question(df):
-    row = df.sample().iloc[0]
-    correct_lang = row['language']
-    sentence = row['sentence']
-    # Pick 3 wrong options
-    wrong_langs = df[df['language'] != correct_lang]['language'].sample(3).tolist()
-    options = wrong_langs + [correct_lang]
-    random.shuffle(options)
-    return sentence, correct_lang, options
-
-# --- Streamlit UI ---
+# --- Set up page ---
 st.set_page_config(page_title="LinguaGuess", page_icon="🌍")
-st.title("🌍 LinguaGuess")
-st.subheader("Can you guess the language from the sentence?")
 
+st.markdown("""
+    <style>
+    body {
+        background-color: #e0f7fa;
+    }
+    .main-title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    .subtitle {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #555;
+        margin-bottom: 1rem;
+    }
+    .difficulty-box {
+        background-color: #ffffffcc;
+        padding: 2rem;
+        border-radius: 1rem;
+        width: 100%;
+        max-width: 600px;
+        margin: 2rem auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+    .start-btn {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
+# --- Load dataset ---
 df = load_sentences()
-if 'score' not in st.session_state:
-    st.session_state.score = 0
-    st.session_state.rounds = 0
-if 'show_try_again' not in st.session_state:
-    st.session_state.show_try_again = False      # hide by default
+init_session_state()
 
-# Initialize question only once
-if 'current_question' not in st.session_state:
-    sentence, answer, options = get_question(df)
-    st.session_state.current_question = {
-        'sentence': sentence,
-        'answer': answer,
-        'options': options
-    }
+# --- Main App Flow ---
+if not st.session_state.game_started:
+    game_setup_screen(DIFFICULTY_LEVELS)
+else:
+    difficulty = st.session_state.difficulty
+    filtered_df = df[df['difficulty'] == difficulty]
 
-q = st.session_state.current_question
+    if filtered_df.empty:
+        st.warning(f"No questions found for difficulty '{difficulty}'. Please restart and choose another level.")
+        st.stop()
 
-
-st.markdown(f"### Sentence:\n> *{q['sentence']}*")
-
-
-selected = st.radio("Which language is this?", q['options'])
-
-
-if st.button("Submit"):
-    st.session_state.rounds += 1
-    if selected == q['answer']:
-        st.success("✅ Correct!")
-        st.session_state.score += 1
-        st.session_state.show_try_again = False  
-        # 🔁 Generate and store next question
-        sentence, answer, options = get_question(df)
-        st.session_state.current_question = {
-        'sentence': sentence,
-        'answer': answer,
-        'options': options
-    }
-        st.rerun()
-    else:
-        st.error(f"❌ Nope! The correct answer was **{q['answer']}**.")
-        st.session_state.show_try_again = True
-        st.info(f"Score: {st.session_state.score} / {st.session_state.rounds}")
-
-if st.session_state.show_try_again:
-    if st.button("Try Again"):
-        st.session_state.score = 0
-        st.session_state.rounds = 0
-        st.session_state.show_try_again = False   # hide again for next round
-
-        # generate and store next question
-        sentence, answer, options = get_question(df)
-        st.session_state.current_question = {
-            'sentence': sentence,
-            'answer': answer,
-            'options': options
-        }
-        st.rerun()
-
-
+    game_loop(filtered_df)

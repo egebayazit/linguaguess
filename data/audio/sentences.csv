@@ -1,8 +1,53 @@
-language,sentence,difficulty,id
-Spanish,¿Cómo estás?,easy,es_001
-French,Comment ça va ?,easy,fr_001
-German,Wie geht's dir?,easy,de_001
-Japanese,元気ですか,medium,jp_001
-Turkish,Nasılsın?,easy,tr_001
-Korean,잘 지냈어요?,medium,kr_001
-Italian,Come stai?,easy,it_001
+language,sentence,difficulty,id,hint
+Spanish,¿Cómo estás?,easy,es_001,Romance language (Latin-based)
+French,Comment ça va ?,easy,fr_001,Romance language (Latin-based)
+German,Wie geht's dir?,easy,de_001,Germanic language
+Japanese,元気ですか,medium,jp_001,Japonic language
+Turkish,Nasılsın?,easy,tr_001,Turkic language
+Korean,잘 지냈어요?,medium,kr_001,Koreanic language
+Italian,Come stai?,easy,it_001,Romance language (Latin-based)
+Russian,Как дела?,medium,ru_001,Slavic language
+Arabic,كيف حالك؟,medium,ar_001,Afro-Asiatic (Semitic) language
+Hindi,क्या हाल है?,medium,hi_001,Indo-Aryan (Indian) language
+Portuguese,Como você está?,easy,pt_001,Romance language (Latin-based)
+Chinese,你好吗？,hard,zh_001,Sino-Tibetan language
+Greek,Τι κάνεις;,medium,el_001,Hellenic language
+Dutch,Hoe gaat het?,easy,nl_001,Germanic language
+Swedish,Hur mår du?,easy,se_001,Germanic language
+Spanish,Buenos días,medium,es_002,Romance language (Latin-based)
+French,Bonsoir,medium,fr_002,Romance language (Latin-based)
+German,Guten Abend,medium,de_002,Germanic language
+Japanese,こんばんは,medium,jp_002,Japonic language
+Turkish,İyi akşamlar,medium,tr_002,Turkic language
+Korean,안녕하세요,medium,kr_002,Koreanic language
+Italian,Arrivederci,medium,it_002,Romance language (Latin-based)
+Russian,Добрый день,medium,ru_002,Slavic language
+Arabic,مرحبا,medium,ar_002,Afro-Asiatic (Semitic) language
+Hindi,नमस्ते,easy,hi_002,Indo-Aryan (Indian) language
+Portuguese,Boa noite,medium,pt_002,Romance language (Latin-based)
+Chinese,早上好,hard,zh_002,Sino-Tibetan language
+Greek,Καλησπέρα,medium,el_002,Hellenic language
+Dutch,Tot ziens,medium,nl_002,Germanic language
+Swedish,God morgon,medium,se_002,Germanic language
+Finnish,Hyvää päivää,hard,fi_001,Uralic language
+Hebrew,בוקר טוב,hard,he_001,Afro-Asiatic (Semitic) language
+Hungarian,Jó reggelt,hard,hu_001,Uralic language
+Polish,Dzień dobry,medium,pl_001,Slavic language
+Norwegian,God kveld,medium,no_001,Germanic language
+Zulu,Sawubona,medium,zu_001,Bantu language
+Thai,สวัสดี,medium,th_001,Kra–Dai language
+Georgian,როგორ ხარ?,hard,ka_001,Kartvelian language
+Amharic,እንዴት ነህ?,hard,am_001,Afro-Asiatic (Semitic) language
+Burmese,နေကောင်းလား၊,hard,my_001,Sino-Tibetan language
+Mongolian,Сайн байна уу?,hard,mn_001,Mongolic language
+Lao,ສະບາຍດີບໍ?,hard,lo_001,Kra–Dai language
+Telugu,నువ్వు ఎలా ఉన్నావు?,hard,te_001,Dravidian (South Indian) language
+Tamil,நீங்கள் எப்படி இருக்கிறீர்கள்?,hard,ta_001,Dravidian (South Indian) language
+Armenian,Ինչպես ես?,hard,hy_001,Indo-European language
+Khmer,សុខសប្បាយរបស់អ្នកយ៉ាងដូចម្តេច?,hard,km_001,Austroasiatic language
+Ukrainian,Як справи?,hard,uk_001,Slavic language
+Malayalam,സുഖമാണോ?,hard,ml_001,Dravidian (South Indian) language
+Pashto,تاسې څنګه یاست؟,hard,ps_001,Iranian (Indo-Iranian) language
+Gujarati,તમે કેમ છો?,hard,gu_001,Indo-Aryan (Indian) language
+Basque,Nola zaude?,hard,eu_001,Language isolate (Basque)
+Icelandic,Hvernig hefurðu það?,hard,is_001,Germanic language
