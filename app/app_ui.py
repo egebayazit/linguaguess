@@ -3,20 +3,43 @@ from session_utils import reset_game
 from question_generator import generate_question
 import logging
 import pandas as pd
+from styles import apply_global_styles
 
 def game_setup_screen(difficulties: list[str]) -> None:
+    apply_global_styles()
+    
+    # Add some top spacing
+    st.markdown("<div style='height: 80px'></div>", unsafe_allow_html=True)
+    
+    # Main title with enhanced styling
     st.markdown("<div class='main-title'>🌍 LinguaGuess</div>", unsafe_allow_html=True)
     st.markdown("<div class='subtitle'>🧠 Choose Your Difficulty</div>", unsafe_allow_html=True)
-
-    # Start the difficulty-box container
-    st.markdown("<div class='difficulty-box'>Pick how challenging your language guessing adventure should be!</div>", unsafe_allow_html=True)
+    
+    # Add a description/tagline
+    st.markdown("""
+        <div style='text-align: center; color: white; font-size: 18px; 
+                    margin: 20px 0 40px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);'>
+            Test your language knowledge with sentences from around the world!
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Replace the flags section with:
+    st.markdown("""
+    <div style='text-align: center; margin: 30px 0;'>
+        <span style='font-size: 40px; margin: 0 15px;'>🏴</span>
+        <span style='font-size: 40px; margin: 0 15px;'>🏳️</span>
+        <span style='font-size: 40px; margin: 0 15px;'>🌍</span>
+        <span style='font-size: 40px; margin: 0 15px;'>🗺️</span>
+        <span style='font-size: 40px; margin: 0 15px;'>🌐</span>
+    </div>
+""", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         difficulty = st.selectbox("Difficulty", difficulties, index=0)
 
     # Center the button using columns
-    col1, col2, col3 = st.columns([2, 1, 2])  # Adjust ratios as needed
+    col1, col2, col3 = st.columns([2, 1, 2])
     with col2:
         if st.button("🚀 Start Game"):
             st.session_state.difficulty = difficulty
@@ -30,11 +53,11 @@ def game_setup_screen(difficulties: list[str]) -> None:
             logging.info(f"Game started with difficulty: {difficulty}")
             st.rerun()
 
-    st.markdown("</div>", unsafe_allow_html=True)  # End .difficulty-box
 
 
 
 def game_loop(filtered_df: pd.DataFrame) -> None:
+    apply_global_styles()
     if not st.session_state.question_order:
         st.session_state.question_order = filtered_df.sample(frac=1).index.tolist()
         st.session_state.question_index = 0

@@ -4,6 +4,7 @@ from config import DIFFICULTY_LEVELS
 from data_loader import load_sentences
 from session_utils import init_session_state
 from app_ui import game_setup_screen, game_loop
+from styles import apply_global_styles
 
 # --- Logging setup ---
 logging.basicConfig(
@@ -15,40 +16,8 @@ logging.basicConfig(
 # --- Set up page ---
 st.set_page_config(page_title="LinguaGuess", page_icon="🌍")
 
-st.markdown("""
-    <style>
-    body {
-        background-color: #e0f7fa;
-    }
-    .main-title {
-        text-align: center;
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-    }
-    .subtitle {
-        text-align: center;
-        font-size: 1.5rem;
-        color: #555;
-        margin-bottom: 1rem;
-    }
-    .difficulty-box {
-        background-color: #ffffffcc;
-        padding: 2rem;
-        border-radius: 1rem;
-        width: 100%;
-        max-width: 600px;
-        margin: 2rem auto;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        text-align: center;
-    }
-    .start-btn {
-        text-align: center;
-        margin-top: 1.5rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
+# Apply global styles
+apply_global_styles()
 
 # --- Load dataset ---
 df = load_sentences()
