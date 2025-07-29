@@ -1,6 +1,6 @@
 import streamlit as st
 from session_utils import reset_game
-from question_generator import generate_question
+from core.question_generator import generate_question
 import logging
 import pandas as pd
 from styles import apply_global_styles

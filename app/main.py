@@ -1,7 +1,7 @@
 import streamlit as st
 import logging
-from config import DIFFICULTY_LEVELS
-from data_loader import load_sentences
+from core.config import DIFFICULTY_LEVELS
+from core.data_loader import load_sentences
 from session_utils import init_session_state
 from app_ui import game_setup_screen, game_loop
 from styles import apply_global_styles
